@@ -58,11 +58,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: io.github.rob__.performancer" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23f35fee-c69a-4b35-aedd-461e198f9d42" name="Default" comment="">
-      <change type="DELETED" beforePath="A:\Android\AndroidStudio\Projects\Performancer\gradle.properties" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ProcessButtonLibrary/ProcessButtonLibrary.iml" afterPath="$PROJECT_DIR$/ProcessButtonLibrary/ProcessButtonLibrary.iml" />
-    </list>
+    <list default="true" id="23f35fee-c69a-4b35-aedd-461e198f9d42" name="Default" comment="" />
     <ignored path="Performancer.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="../../Performancer/local.properties" />
@@ -3025,7 +3021,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Confirmation" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="options.splitter.main.proportions" value="0.2925" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
