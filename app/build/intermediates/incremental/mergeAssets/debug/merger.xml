@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="2.1.0" >
+        <source path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets" >
+            <file
+                name="fonts/Roboto-Black.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-Black.ttf" />
+            <file
+                name="fonts/Roboto-BlackItalic.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-BlackItalic.ttf" />
+            <file
+                name="fonts/Roboto-Bold.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-Bold.ttf" />
+            <file
+                name="fonts/Roboto-BoldItalic.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-BoldItalic.ttf" />
+            <file
+                name="fonts/Roboto-Italic.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-Italic.ttf" />
+            <file
+                name="fonts/Roboto-Light.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-Light.ttf" />
+            <file
+                name="fonts/Roboto-LightItalic.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-LightItalic.ttf" />
+            <file
+                name="fonts/Roboto-Medium.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-Medium.ttf" />
+            <file
+                name="fonts/Roboto-MediumItalic.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-MediumItalic.ttf" />
+            <file
+                name="fonts/Roboto-Regular.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-Regular.ttf" />
+            <file
+                name="fonts/Roboto-Thin.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-Thin.ttf" />
+            <file
+                name="fonts/Roboto-ThinItalic.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\Roboto-ThinItalic.ttf" />
+            <file
+                name="fonts/RobotoCondensed-Bold.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoCondensed-Bold.ttf" />
+            <file
+                name="fonts/RobotoCondensed-BoldItalic.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoCondensed-BoldItalic.ttf" />
+            <file
+                name="fonts/RobotoCondensed-Italic.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoCondensed-Italic.ttf" />
+            <file
+                name="fonts/RobotoCondensed-Light.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoCondensed-Light.ttf" />
+            <file
+                name="fonts/RobotoCondensed-LightItalic.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoCondensed-LightItalic.ttf" />
+            <file
+                name="fonts/RobotoCondensed-Regular.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoCondensed-Regular.ttf" />
+            <file
+                name="fonts/RobotoSlab-Bold.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoSlab-Bold.ttf" />
+            <file
+                name="fonts/RobotoSlab-Light.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoSlab-Light.ttf" />
+            <file
+                name="fonts/RobotoSlab-Regular.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoSlab-Regular.ttf" />
+            <file
+                name="fonts/RobotoSlab-Thin.ttf"
+                path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.github.johnkil.android-robototextview\robototextview\2.1.0\assets\fonts\RobotoSlab-Thin.ttf" />
+        </source>
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\Performancer\ProcessButtonLibrary\unspecified\assets" />
+    </dataSet>
+    <dataSet config="20.0.0" >
+        <source path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\20.0.0\assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="A:\Android\AndroidStudio\Projects\Performancer\app\build\intermediates\exploded-aar\Performancer\CircularProgressBarLibrary\unspecified\assets" />
+    </dataSet>
+    <dataSet config="main" >
+        <source path="A:\Android\AndroidStudio\Projects\Performancer\app\src\main\assets" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="A:\Android\AndroidStudio\Projects\Performancer\app\src\debug\assets" />
+    </dataSet>
+
+</merger>

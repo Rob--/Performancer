@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/storage_gradient_c" />
+    <item android:drawable="@drawable/gradient_e" />
+</transition><!-- From: file:/A:/Android/AndroidStudio/Projects/Performancer/app/src/main/res/drawable/storage_transition.xml -->

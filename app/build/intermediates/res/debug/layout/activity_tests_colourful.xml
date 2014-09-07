@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:apb="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlTests"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_e"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="io.github.rob__.performancer.Tests" >
+
+    <com.dd.processbutton.iml.ActionProcessButton
+        android:id="@+id/btnTest1"
+        style="@style/ActionProcessButton"
+        android:text="Run CPU Test #1"
+        apb:pb_textProgress="Running" />
+
+    <com.dd.processbutton.iml.ActionProcessButton
+        android:id="@+id/btnTest2"
+        style="@style/ActionProcessButton"
+        android:text="Run CPU Test #2"
+        apb:pb_textProgress="Running (click to stop)" />
+
+    <com.dd.processbutton.iml.ActionProcessButton
+        android:id="@+id/btnTest3"
+        style="@style/ActionProcessButton"
+        android:text="Run RAM Test #1"
+        apb:pb_textProgress="Running" />
+
+    <com.dd.processbutton.iml.ActionProcessButton
+        android:id="@+id/btnTest4"
+        style="@style/ActionProcessButton"
+        android:text="Run RAM Test #2"
+        apb:pb_textProgress="Running (click to stop)" />
+
+    <TextView
+        android:id="@+id/tvTestStatus"
+        android:textColor="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvTestStatus2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+</LinearLayout><!-- From: file:/A:/Android/AndroidStudio/Projects/Performancer/app/src/main/res/layout/activity_tests_colourful.xml -->

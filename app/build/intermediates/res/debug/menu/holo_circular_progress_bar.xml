@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+
+</menu><!-- From: file:/A:/Android/AndroidStudio/Projects/Performancer/CircularProgressBarLibrary/res/menu/holo_circular_progress_bar.xml --><!-- From: file:/A:/Android/AndroidStudio/Projects/Performancer/app/build/intermediates/exploded-aar/Performancer/CircularProgressBarLibrary/unspecified/res/menu/holo_circular_progress_bar.xml -->
