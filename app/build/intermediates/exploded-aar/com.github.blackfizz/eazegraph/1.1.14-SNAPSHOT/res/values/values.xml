@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/Users/paul/Documents/EazeGraph/Library/EazeGraphLibrary/src/main/res/values/attrs_bar_chart.xml -->
+    <eat-comment />
+
+    <declare-styleable name="BarChart">
+        <attr name="egShowValues" format="boolean" />
+    </declare-styleable>
+    <!-- From: file:/Users/paul/Documents/EazeGraph/Library/EazeGraphLibrary/src/main/res/values/attrs_base_bar_chart.xml -->
+    <eat-comment />
+
+    <declare-styleable name="BaseBarChart">
+        <attr name="egBarWidth" format="dimension" />
+        <attr name="egBarMargin" format="dimension" />
+        <attr name="egFixedBarWidth" format="boolean" />
+        <attr name="egEnableScroll" format="boolean" />
+        <attr name="egVisibleBars" format="integer" />
+    </declare-styleable>
+    <!-- From: file:/Users/paul/Documents/EazeGraph/Library/EazeGraphLibrary/src/main/res/values/attrs_base_chart.xml -->
+    <eat-comment />
+
+    <declare-styleable name="BaseChart">
+        <attr name="egAnimationTime" format="integer" />
+        <attr name="egLegendColor" format="color" />
+        <attr name="egLegendHeight" format="dimension" />
+        <attr name="egLegendTextSize" format="dimension" />
+        <attr name="egShowDecimal" format="boolean" />
+    </declare-styleable>
+    <!-- From: file:/Users/paul/Documents/EazeGraph/Library/EazeGraphLibrary/src/main/res/values/attrs_pie_chart.xml -->
+    <eat-comment />
+
+    <declare-styleable name="PieChart">
+        <attr name="egInnerPadding" format="float" />
+        <attr name="egInnerPaddingOutline" format="float" />
+        <attr name="egUseInnerPadding" format="boolean" />
+        <attr name="egHighlightStrength" format="float" />
+        <attr name="egUsePieRotation" format="boolean" />
+        <attr name="egAutoCenter" format="boolean" />
+        <attr name="egDrawValueInPie" format="boolean" />
+        <attr name="egValueTextSize" format="dimension" />
+        <attr name="egValueTextColor" format="color" />
+        <attr name="egUseCustomInnerValue" format="boolean" />
+        <attr name="egOpenClockwise" format="boolean" />
+        <attr name="egInnerPaddingColor" format="color" />
+        <attr name="egInnerValueUnit" format="string" />
+    </declare-styleable>
+    <!-- From: file:/Users/paul/Documents/EazeGraph/Library/EazeGraphLibrary/src/main/res/values/attrs_value_line_chart.xml -->
+    <eat-comment />
+
+    <declare-styleable name="ValueLineChart">
+        <attr name="egCurveSmoothness" format="float" />
+        <attr name="egUseCubic" format="boolean" />
+        <attr name="egUseOverlapFill" format="boolean" />
+        <attr name="egLineStroke" format="dimension" />
+        <attr name="egShowValueIndicator" format="boolean" />
+        <attr name="egIndicatorWidth" format="dimension" />
+        <attr name="egIndicatorLineColor" format="color" />
+        <attr name="egIndicatorTextColor" format="color" />
+        <attr name="egIndicatorTextSize" format="dimension" />
+        <attr name="egIndicatorLeftPadding" format="dimension" />
+        <attr name="egIndicatorTopPadding" format="dimension" />
+        <attr name="egShowStandardValue" format="boolean" />
+        <attr name="egXAxisStroke" format="dimension" />
+        <attr name="egActivateIndicatorShadow" format="boolean" />
+        <attr name="egIndicatorShadowStrength" format="dimension" />
+        <attr name="egIndicatorShadowColor" format="color" />
+        <attr name="egIndicatorTextUnit" format="string" />
+        <attr name="egShowLegendBeneathIndicator" format="boolean" />
+        <attr name="egUseDynamicScaling" format="boolean" />
+        <attr name="egScalingFactor" format="float" />
+    </declare-styleable>
+    <!-- From: file:/Users/paul/Documents/EazeGraph/Library/EazeGraphLibrary/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="app_name">EazeGraphLibrary</string>
+
+</resources>
