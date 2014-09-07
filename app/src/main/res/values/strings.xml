@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Performancer</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Menu (Action Bar) -->
+    <string name="action_about">About</string>
+    <string name="action_refresh_delay">Refresh Delay</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Details -->
+    <string name="details_e">Details</string>
+    <string name="details_c">…</string>
+
+    <!-- Usage -->
+    <string name="usageRAM">0.0%</string>
+    <string name="usageCPU">0.0%</string>
+    <string name="usageBattery">0.0%</string>
+    <string name="usageStorage">0.0%</string>
+
+    <!-- Preferences -->
+    <string-array name="themes">
+        <item>Colourful</item>
+        <item>Minimalistic</item>
+    </string-array>
+    <string-array name="themeValues">
+        <item>col</item>
+        <item>min</item>
+    </string-array>
+    <string-array name="data_units">
+        <item>Kilobytes</item>
+        <item>Megabytes</item>
+    </string-array>
+    <string-array name="data_unitsValues">
+        <item>kb</item>
+        <item>mb</item>
+    </string-array>
+    <string-array name="temp_units">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
+    <string-array name="temp_unitsValues">
+        <item>c</item>
+        <item>f</item>
+    </string-array>
+
+</resources>

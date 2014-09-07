@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+configurations {
+    // This will stop the TOP-LEVEL EXCEPTION ERROR by excluding duplicated.
+    // The support-v4 is eventually added below via support-v7.
+    all*.exclude group: 'com.android.support', module: 'support-v4'
+}
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion '20.0.0'
+
+    defaultConfig {
+        applicationId "io.github.rob__.performancer"
+        minSdkVersion 16
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+dependencies {
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+	compile project(':CircularProgressBarLibrary')
+	compile 'com.android.support:appcompat-v7:20.0.0'
+	compile project(':ProcessButtonLibrary')
+	compile project(':SlidingMenuLibrary')
+	compile 'com.github.johnkil.android-robototextview:robototextview:2.1.0' // I've deleted all unused Roboto fonts.
+	compile 'com.github.blackfizz:eazegraph:1.1.14-SNAPSHOT@aar'
+	compile 'com.nineoldandroids:library:2.4.0'
+	compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+}
+
+repositories {
+	maven { url 'https://oss.sonatype.org/content/groups/public' }
+}

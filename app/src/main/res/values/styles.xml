@@ -1,0 +1,71 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <style name="AppThemeColourful" parent="Theme.AppCompat.Light.DarkActionBar"></style>
+    <style name="AppThemeMinimalistic" parent="Theme.AppCompat.Light"></style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="circularProgressBarStyle">@style/CircularProgressBar</item>
+    </style>
+
+    <!-- Circular Progress Bar -->
+    <style name="CircularProgressBar">
+        <item name="stroke_width">10dp</item>
+        <item name="marker_progress">0</item>
+        <item name="progress_background_color">#ffffff</item>
+        <item name="marker_visible">true</item>
+        <item name="thumb_visible">false</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="progress">100</item>
+    </style>
+
+    <!-- Caption -->
+    <style name="caption">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:shadowColor">#ffffff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">25</item>
+	    <item name="android:textSize">40dip</item>
+	    <item name="typeface">roboto_light</item>
+    </style>
+
+    <!-- Menu Item -->
+    <style name="menuItem">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">50dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:shadowColor">#ffffff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">25</item>
+    </style>
+
+	<style name="ActionProcessButton">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginBottom">16dp</item>
+		<item name="android:textColor">@android:color/white</item>
+		<item name="android:textSize">18sp</item>
+		<item name="pb_colorNormal">@color/black</item>
+		<item name="pb_colorPressed">@color/black_light</item>
+	</style>
+</resources>

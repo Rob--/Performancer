@@ -1,0 +1,25 @@
+<resources>
+    <!-- Used for some TextViews on minimalistic -->
+	<color name="grey">#5e5e5e</color>
+	<color name="grey_dark">#212121</color>
+
+	<!-- Colours used for each display
+		 RAM, CPU, Battery, Tests respectively. -->
+	<color name="blue">#2980B9</color>
+	<color name="blue_light">#3498db</color>
+
+	<color name="green">#27AE60</color>
+	<color name="green_light">#2ecc71</color>
+
+	<color name="red">#C0392B</color>
+	<color name="red_light">#e74c3c</color>
+
+	<color name="black">#1C1C1C</color>
+	<color name="black_light">#0D0D0D</color>
+
+	<color name="blue_grey">#5e5e5e</color>
+	<color name="blue_grey_dark">#95a5a6</color>
+
+	<color name="navy_blue">#2c3e50</color>
+	<color name="navy_blue_light">#34495e</color>
+</resources>

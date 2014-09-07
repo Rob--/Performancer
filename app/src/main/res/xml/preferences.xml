@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+	<PreferenceCategory
+		android:title="General"
+		android:key="key_general">
+
+		<ListPreference
+			android:title="Themes"
+			android:summary="Choose a preferred theme for the application."
+			android:key="theme"
+			android:entries="@array/themes"
+			android:entryValues="@array/themeValues"
+			android:defaultValue="col"/>
+
+		<ListPreference
+			android:title="Data unit"
+		    android:summary="Choose a preferred data unit."
+		    android:key="data unit"
+		    android:entries="@array/data_units"
+		    android:entryValues="@array/data_unitsValues"
+			android:defaultValue="mb"/>
+
+		<ListPreference
+			android:title="Temperature unit"
+		    android:summary="Choose a preferred temperature unit."
+		    android:key="temp unit"
+		    android:entries="@array/temp_units"
+		    android:entryValues="@array/temp_unitsValues"
+			android:defaultValue="c"/>
+
+		<CheckBoxPreference
+			android:title="Show Advanced Details"
+		    android:summaryOn="When possible, show a more advanced range of details."
+		    android:summaryOff="When possible, do not show a more advanced range of details."
+		    android:key="advanced"
+			android:defaultValue="false"/>
+
+	</PreferenceCategory>
+
+</PreferenceScreen>

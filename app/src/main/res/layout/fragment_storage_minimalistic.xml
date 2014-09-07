@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rlStorage"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context="io.github.rob__.performancer.storage.Storage">
+
+	<com.devspark.robototextview.widget.RobotoTextView
+		android:id="@+id/lblUsageStorage"
+		android:text="Internal Storage"
+		style="@style/caption"
+		android:clickable="true"
+		android:textColor="@color/grey" />
+
+	<org.eazegraph.lib.charts.PieChart
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:id="@+id/pcStorage"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="8dp"
+		app:egLegendTextSize="18sp"
+		app:egUsePieRotation="true"
+		app:egValueTextSize="36sp"
+		android:layout_below="@+id/lblUsageStorage"
+		android:layout_above="@+id/btnDetailsStorage"/>
+
+	<Button
+		android:id="@+id/btnDetailsStorage"
+		android:background="@color/grey"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="..."
+		android:textColor="#ffffff"
+		android:layout_alignParentBottom="true"/>
+
+	<ListView
+		android:id="@+id/lvStorage"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@+id/btnDetailsStorage" />
+
+</RelativeLayout>
