@@ -17,8 +17,9 @@ import io.github.rob__.performancer.R;
 
 public class InfoCPU {
 	
-	List<String> info;
-	ArrayAdapter<String> adapter;
+	List<String>            info;
+	ArrayAdapter<String>    adapter;
+	RandomAccessFile        reader;
 	
 	SharedPreferences prefs;
 	public void init(Context context){
@@ -29,59 +30,6 @@ public class InfoCPU {
 		if(!prefs.contains("os.arch"))  { prefs.edit().putString("os.arch",     System.getProperty("os.arch"))  .apply(); }
 		if(!prefs.contains("model"))    { prefs.edit().putString("model",       getModel())                     .apply(); }
 	}
-	
-	/**
-	 * Returns OS name.
-	 */
-	public String getOSName(){
-		return System.getProperty("os.name");
-	}
-	
-	/**
-	 * Returns OS version
-	 */
-	public String getOSVersion(){
-		return System.getProperty("os.version");
-	}
-	
-	/**
-	 * Returns OS architecture.
-	 */
-	public String getOSArch(){
-		return System.getProperty("os.arch");
-	}
-	
-	/**
-     * Returns a SystemProperty
-     *
-     * @param propName The property to retrieve
-     * @return Property value (null if n/a).
-     */
-    public static String getSystemProperty(String propName) {
-        String pvalue;
-        BufferedReader input = null;
-        try {
-            Process p = Runtime.getRuntime().exec("getprop " + propName);
-            input = new BufferedReader(new InputStreamReader(p.getInputStream()), 1024);
-            pvalue = input.readLine();
-            input.close();
-        }
-        catch (IOException e) {
-            // Can't read shell output.
-            e.printStackTrace();
-            return null;
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return pvalue;
-    }
     
     /**
      * Returns cpu information (parsed).
@@ -89,8 +37,8 @@ public class InfoCPU {
 	public ArrayAdapter<String> populateListView(Context context){
     	if(prefs.getBoolean("advanced", false)){
     		adapter = null;
-			info = new ArrayList<String>();
-			RandomAccessFile reader = null;
+			info    = new ArrayList<>();
+			reader  = null;
     		try {
         		reader = new RandomAccessFile("/proc/cpuinfo", "r");
         		String line;
@@ -100,7 +48,7 @@ public class InfoCPU {
 					}
         		}
         		reader.close();
-        		adapter = new ArrayAdapter<String>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
+        		adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
         		return adapter;
     		} catch (IOException e) {
         		e.printStackTrace();
@@ -109,7 +57,7 @@ public class InfoCPU {
     	} else {
 			// not advance
     		adapter = null;
-			info = new ArrayList<String>();
+			info = new ArrayList<>();
 			
 			info.add("Cores: " + String.valueOf(prefs.getInt("coreCount", getCoreCount())));
 			int core = 0;
@@ -129,8 +77,12 @@ public class InfoCPU {
 			info.add("Min Clock Speed: "    + String.valueOf(prefs.getInt("minFreq", getMinFreq())) + " MHz");
 			info.add("Architecture: "       + prefs.getString("os.arch", System.getProperty("os.arch")));
 			info.add("Model: "              + prefs.getString("model", getModel()));
+		    double t = getCpuTemp();
+		    if(!(t == 0.0)){
+			    info.add("Temperature: " + String.valueOf(t));
+		    }
 			
-			adapter = new ArrayAdapter<String>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
+			adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
 	    	return adapter;
     	}
     }
@@ -139,7 +91,7 @@ public class InfoCPU {
 	 * Get model.
 	 */
 	public String getModel(){
-		RandomAccessFile reader = null;
+		reader = null;
 		String line;
 		try {
 			reader = new RandomAccessFile("/proc/cpuinfo", "r");
@@ -147,7 +99,7 @@ public class InfoCPU {
 				if(line.contains("processor")){
 					reader.readLine();
 				} else if(!line.equals("") && !line.contains("implementer") && !line.contains("architecture") && !line.contains("variant") && !line.contains("part") && !line.contains("Revision") && !line.contains("revision") && !line.contains("Serial") && !line.contains("Features") && !line.contains("Processor")) {
-					line.replace("Hardware: ", "");
+					line = line.replace("Hardware: ", "");
 					reader.close();
 					return line;
 				}

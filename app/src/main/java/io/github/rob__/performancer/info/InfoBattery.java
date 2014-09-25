@@ -16,17 +16,19 @@ import java.util.List;
 import io.github.rob__.performancer.R;
 
 public class InfoBattery {
-	
-	Intent intent = new Intent();
-	float level = 0;
-	String health = "";
-	String tech = "";
-	String plugged = "";
-	String status = "";
-	float voltage = 0;
-	float temp = 0;
-	boolean present = false;
-	boolean charging = false;
+
+	float level         = 0;
+	String health       = "";
+	String tech         = "";
+	String plugged      = "";
+	String status       = "";
+	float voltage       = 0;
+	float temp          = 0;
+	boolean present     = false;
+	boolean charging    = false;
+
+	ArrayAdapter<String>    adapter;
+	List<String>            info;
 
 	SharedPreferences prefs;
 	public void init(Context context){
@@ -34,39 +36,31 @@ public class InfoBattery {
 	}
 	
 	public ArrayAdapter<String> populateListView(Context context){
-		ArrayAdapter<String> adapter = null;
-		List<String> info = new ArrayList<String>();
+		adapter = null;
+		info = new ArrayList<>();
 		
 		info.add("Health: "                 + health);
 		info.add("Tech: "                   + tech);
 		if(charging){ info.add("Plug Type: "+ plugged); }
 		info.add("Status: "                 + status);
-		info.add("Voltage: "                + String.valueOf(voltage / 1000) + "V");
-        info.add("Temp: "                   + ((prefs.getString("temp unit", "c").equals("c")) ? (String.valueOf(temp / 10) + "\u2103") : String.valueOf(round((((temp / 10) * 1.8) + 32), 2) + "\u2109")));
+		info.add("Voltage: "                + String.valueOf(voltage) + " mV");
+        info.add("Temperature: "            + ((prefs.getString("temp unit", "c").equals("c")) ? (String.valueOf(temp / 10) + "\u2103") : String.valueOf(round((((temp / 10) * 1.8) + 32), 2) + "\u2109")));
 		info.add("Battery Present: "        + ((present) ? "True" : "False"));
 		
-		adapter = new ArrayAdapter<String>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
+		adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
     	return adapter;
 	}
 	
 	public void updateBatteryInformation(Context context){
 		Intent  bI          = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-		boolean present_    = bI.getBooleanExtra("present", false);
-		tech =  bI.getStringExtra("technology");
-		int     plugged_    = bI.getIntExtra("plugged", -1);
-		float   scale_      = bI.getIntExtra("scale", -1);
-		int     health_     = bI.getIntExtra("health", 0);
-		int     status_     = bI.getIntExtra("status", 0);
-		float   level_      = bI.getIntExtra("level", -1);
-		float   voltage_    = bI.getIntExtra("voltage", 0);
-		float   temp_       = bI.getIntExtra("temperature", 0);
 
-		if(present_) {
-			if (level_ >= 0 && scale_ > 0) {
-				level = level_;
+		present = bI.getBooleanExtra("present", false);
+		if(present) {
+			if (bI.getIntExtra("level", -1) >= 0 && bI.getIntExtra("scale", -1) > 0) {
+				level = bI.getIntExtra("level", -1);
 			}
 
-			switch(plugged_){
+			switch(bI.getIntExtra("plugged", -1)){
 			case BatteryManager.BATTERY_PLUGGED_AC:
 				plugged = "AC";
 				break;
@@ -81,7 +75,7 @@ public class InfoBattery {
 				break;
 			}
 			
-			switch(status_){
+			switch(bI.getIntExtra("status", 0)){
 			case BatteryManager.BATTERY_STATUS_CHARGING:
 				status = "Charging";
 				charging = true;
@@ -105,7 +99,7 @@ public class InfoBattery {
 				break;
 			}
 			
-			switch(health_){
+			switch(bI.getIntExtra("health", 0)){
 			case BatteryManager.BATTERY_HEALTH_COLD:
 				health = "Cold";
 				break;
@@ -129,20 +123,18 @@ public class InfoBattery {
 				break;
 			}
 			
-			voltage = (float) voltage_;
-			temp = temp_;
-			present = present_;
-			
+			voltage     = bI.getIntExtra      ("voltage"      , 0     );
+			temp        = bI.getIntExtra      ("temperature"  , 0     );
+			tech        = bI.getStringExtra   ("technology"           );
 		}
 	}
 	
 	public float getBatteryPercentage(Context context){
-		Intent bI = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-		boolean present_ = bI.getBooleanExtra("present", false);
-		int scale_ = bI.getIntExtra("scale", -1);
-		float level_ = bI.getIntExtra("level", -1);
+		Intent bI           = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+		int scale_          = bI.getIntExtra("scale", -1);
+		float level_        = bI.getIntExtra("level", -1);
 
-		if(present_) {
+		if(bI.getBooleanExtra("present", false)) {
 			if (level_ >= 0 && scale_ > 0) {
 				level = level_;
 			}

@@ -49,7 +49,6 @@ public class InfoSensors implements LocationListener {
     double altitude = 0;
     Criteria c = new Criteria();
     LocationManager lm;
-	LocationListener ll;
 	Location l;
 	String provider;
     
@@ -83,7 +82,6 @@ public class InfoSensors implements LocationListener {
     
     // Step Detector/Counter
     int step_c;
-    double step_d;
     
     @Override
     public void onLocationChanged(Location l) {
@@ -184,7 +182,7 @@ public class InfoSensors implements LocationListener {
 		    	
 		    	if(event.sensor.getType() == Sensor.TYPE_PROXIMITY){
 		    		proximity = event.values[0];
-		    		b_proximity = (proximity == 0) ? true : false;
+		    		b_proximity = (proximity == 0);
 		    		if(!prefs.contains("proximity name")){ prefs.edit().putString("proximity name", String.valueOf(event.sensor.getName())).apply(); }
 		    	}
 		    	
@@ -231,24 +229,24 @@ public class InfoSensors implements LocationListener {
 		if(hasStepCounter())		 { 	sm.registerListener(sl, sm.getDefaultSensor(Sensor.TYPE_STEP_COUNTER		), SensorManager.SENSOR_DELAY_UI); }
 		
 		// Settings Menu - CHECK LIST for SENSORS.
-		checkSensors(context);
+		checkSensors();
 	}
 	
-	public boolean hasAccelerometer()		{ /* Constant = 1  */ return (prefs.getBoolean("accelerometer", 	   false)) ? true : false; }
-	public boolean hasMagneticField()		{ /* Constant = 2  */ return (prefs.getBoolean("magnetic field", 	   false)) ? true : false; }
-//	public boolean hasOrientation()			{ /* Constant = 3  */ return (prefs.getBoolean("orientation", 		   false)) ? true : false; }
-	public boolean hasGyroscope()			{ /* Constant = 4  */ return (prefs.getBoolean("gyroscope", 		   false)) ? true : false; }
-	public boolean hasLight()				{ /* Constant = 5  */ return (prefs.getBoolean("light",				   false)) ? true : false; }
-	public boolean hasPressure()			{ /* Constant = 6  */ return (prefs.getBoolean("pressure", 			   false)) ? true : false; }
-	public boolean hasTemperature()			{ /* Constant = 7  */ return (prefs.getBoolean("temperature", 		   false)) ? true : false; }
-	public boolean hasProximity()			{ /* Constant = 8  */ return (prefs.getBoolean("proximity", 		   false)) ? true : false; }
-	public boolean hasGravity()				{ /* Constant = 9  */ return (prefs.getBoolean("gravity", 			   false)) ? true : false; }
-	public boolean hasLinearAccelerometer() { /* Constant = 10 */ return (prefs.getBoolean("linear accelerometer", false)) ? true : false; }
-//	public boolean hasRotationVector()		{ /* Constant = 11 */ return (prefs.getBoolean("rotation vector", 	   false)) ? true : false; }
-	public boolean hasRelativeHumidity()	{ /* Constant = 12 */ return (prefs.getBoolean("relative humidity",    false)) ? true : false; }
-	public boolean hasAmbientTemperature()	{ /* Constant = 13 */ return (prefs.getBoolean("ambient temperature",  false)) ? true : false; }
-//	public boolean hasStepDetector()		{ /* Constant = 18 */ return (prefs.getBoolean("step detector", 	   false)) ? true : false; }
-	public boolean hasStepCounter()			{ /* Constant = 19 */ return (prefs.getBoolean("step counter",		   false)) ? true : false; }
+	public boolean hasAccelerometer()		{ /* Constant = 1  */ return (prefs.getBoolean("accelerometer", 	   false)); }
+	public boolean hasMagneticField()		{ /* Constant = 2  */ return (prefs.getBoolean("magnetic field", 	   false)); }
+//	public boolean hasOrientation()			{ /* Constant = 3  */ return (prefs.getBoolean("orientation", 		   false)); }
+	public boolean hasGyroscope()			{ /* Constant = 4  */ return (prefs.getBoolean("gyroscope", 		   false)); }
+	public boolean hasLight()				{ /* Constant = 5  */ return (prefs.getBoolean("light",				   false)); }
+	public boolean hasPressure()			{ /* Constant = 6  */ return (prefs.getBoolean("pressure", 			   false)); }
+//	public boolean hasTemperature()			{ /* Constant = 7  */ return (prefs.getBoolean("temperature", 		   false)); }
+	public boolean hasProximity()			{ /* Constant = 8  */ return (prefs.getBoolean("proximity", 		   false)); }
+	public boolean hasGravity()				{ /* Constant = 9  */ return (prefs.getBoolean("gravity", 			   false)); }
+	public boolean hasLinearAccelerometer() { /* Constant = 10 */ return (prefs.getBoolean("linear accelerometer", false)); }
+//	public boolean hasRotationVector()		{ /* Constant = 11 */ return (prefs.getBoolean("rotation vector", 	   false)); }
+	public boolean hasRelativeHumidity()	{ /* Constant = 12 */ return (prefs.getBoolean("relative humidity",    false)); }
+	public boolean hasAmbientTemperature()	{ /* Constant = 13 */ return (prefs.getBoolean("ambient temperature",  false)); }
+//	public boolean hasStepDetector()		{ /* Constant = 18 */ return (prefs.getBoolean("step detector", 	   false)); }
+	public boolean hasStepCounter()			{ /* Constant = 19 */ return (prefs.getBoolean("step counter",		   false)); }
 	
 //	Constant 7 - temperature is deprecated.
 //  Constant 3 - The orientation sensor method is deprecated and therefore a new getOrientation() method is used.
@@ -256,7 +254,7 @@ public class InfoSensors implements LocationListener {
 //	Constant 11 - Rotation Vector is a next to useless sensor.
 //	Constant 18 - too much work required to detect step. nanoseconds -> millisecond and calculations are intensive.
 	
-	private void checkSensors(Context context){
+	private void checkSensors(){
 		prefs.edit().putBoolean("accelerometer", 		check(1)).apply();
 		prefs.edit().putBoolean("magnetic field", 		check(2)).apply();
 //		prefs.edit().putBoolean("orientation", 			check(3)).apply();
@@ -274,7 +272,7 @@ public class InfoSensors implements LocationListener {
 		prefs.edit().putBoolean("step counter",			check(19)).apply();
 	}
 	
-	private boolean check(int sensor){ return (sm.getDefaultSensor(sensor) != null) ? true : false; }
+	private boolean check(int sensor){ return (sm.getDefaultSensor(sensor) != null); }
 	
 	/*
 	 * 
@@ -283,7 +281,7 @@ public class InfoSensors implements LocationListener {
 	
 	public ArrayAdapter<String> populateListView(Context context){
 		adapter = null;
-		info = new ArrayList<String>();
+		info = new ArrayList<>();
 		
 		if(hasAccelerometer()){
 			info.add("Accelerator:");
@@ -302,9 +300,9 @@ public class InfoSensors implements LocationListener {
 		
 		if(hasGravity()){
 			info.add("Gravity:");
-			info.add("    X: " + String.valueOf(round(xyzGy[0], 3)) + " m/s\u00B2");
-			info.add("    Y: " + String.valueOf(round(xyzGy[1], 3)) + " m/s\u00B2");
-			info.add("    Z: " + String.valueOf(round(xyzGy[2], 3)) + " m/s\u00B2");
+			info.add("    X: " + String.valueOf(round(xyzGy[0], 3)) + " m/s\u00B2\u200B\u200B");
+			info.add("    Y: " + String.valueOf(round(xyzGy[1], 3)) + " m/s\u00B2\u200B\u200B");
+			info.add("    Z: " + String.valueOf(round(xyzGy[2], 3)) + " m/s\u00B2\u200B\u200B");
 		}
 		
 		if(hasAccelerometer() && hasMagneticField()){
@@ -339,7 +337,7 @@ public class InfoSensors implements LocationListener {
 		
 		if(hasProximity()){
 			info.add("Proximity:");
-			info.add("    Limit (CM): " + String.valueOf(round(proximity, 3)) + " - " + String.valueOf(b_proximity).toUpperCase());
+			info.add("    Limit: " + String.valueOf(round(proximity, 3)) + " cm - " + String.valueOf(b_proximity).toUpperCase());
 		}
 		
 		if(hasPressure()){
@@ -365,7 +363,7 @@ public class InfoSensors implements LocationListener {
 			}
 		}
 		
-		adapter = new ArrayAdapter<String>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
+		adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
     	return adapter;
 	}
 	
@@ -388,15 +386,7 @@ public class InfoSensors implements LocationListener {
 	    return new BigDecimal(value).setScale(places, RoundingMode.HALF_UP).doubleValue();
 	}
 
-	/**
-	 * Check if a feature is available.
-	 * http://stackoverflow.com/users/220102/tim-goss
-	 * http://stackoverflow.com/questions/5263068/how-to-get-android-device-features-using-package-manager/5264328#5264328
-	 */
 	public boolean isFeatureAvailable(Context context, String feature) {
-		if(context.getPackageManager().hasSystemFeature(feature)){
-			return true;
-		}
-		return false;
+		return context.getPackageManager().hasSystemFeature(feature);
 	}
 }

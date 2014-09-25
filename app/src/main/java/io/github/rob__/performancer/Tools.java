@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.math.BigDecimal;
@@ -32,8 +33,6 @@ public class Tools {
 
 	/**
 	 * Add a sliding menu to activity.
-	 * @param context
-	 * @param activity
 	 */
 	public void addMenu(Context context, Activity activity){
 		menu = new SlidingMenu(context);
@@ -51,13 +50,9 @@ public class Tools {
 
 	/**
 	 * Populate the sliding menu.
-	 * @param items
-	 * @param context
-	 * @param activity
-	 * @param activityName
 	 */
 	public void populateMenu(final ListView items, final Context context, final Activity activity, final String activityName){
-		items.setAdapter(new ArrayAdapter<String>(context, R.layout.menu_item_layout, new String[] {"RAM", "CPU", "BATTERY", "STORAGE", "DEVICE", "SENSORS", "TESTS"}));
+		items.setAdapter(new ArrayAdapter<>(context, R.layout.menu_item_layout, new String[] {"RAM", "CPU", "BATTERY", "STORAGE", "DEVICE", "SENSORS", "TESTS"}));
 		items.setClickable(true);
 		items.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -65,7 +60,7 @@ public class Tools {
 				String i = String.valueOf(items.getItemAtPosition(position));
 				switch(i){
 				case "RAM":
-					if(activityName == "RAM"){
+					if(activityName.equals("RAM")){
 						toggle();
 					} else {
 						activity.finish();
@@ -75,7 +70,7 @@ public class Tools {
 					break;
 				  
 				case "CPU":
-					if(activityName == "CPU"){
+					if(activityName.equals("CPU")){
 						toggle();
 					} else {
 						activity.finish();
@@ -85,7 +80,7 @@ public class Tools {
 					break;
 				  
 				case "BATTERY":
-					if(activityName == "Battery"){
+					if(activityName.equals("Battery")){
 						toggle();
 					} else {
 						activity.finish();
@@ -95,7 +90,7 @@ public class Tools {
 					break;
 				  
 			  	case "SENSORS":
-			  		if(activityName == "Sensors"){
+			  		if(activityName.equals("Sensors")){
 			  			toggle();
 			  		} else {
 			  			activity.finish();
@@ -105,7 +100,7 @@ public class Tools {
 			  		break;
 				 
 			  	case "DEVICE":
-			  		if(activityName == "Device"){
+			  		if(activityName.equals("Device")){
 			  			toggle();
 			  		} else {
 			  			activity.finish();
@@ -115,7 +110,7 @@ public class Tools {
 			  		break;
 			  		
 			  	case "TESTS":
-			  		if(activityName == "Tests"){
+			  		if(activityName.equals("Tests")){
 			  			toggle();
 			  		} else {
 			  			activity.finish();
@@ -125,7 +120,7 @@ public class Tools {
 				    break;
 
 				case "STORAGE":
-					if(activityName == "Storage"){
+					if(activityName.equals("Storage")){
 						toggle();
 					} else {
 						activity.finish();
@@ -146,15 +141,8 @@ public class Tools {
 	}
 
 	/**
-	 * Fade in/out animations.
+	 * Fade in.
 	 */
-	public AlphaAnimation fadeOut(){
-		AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f);
-		fadeOut.setDuration(1000);
-		fadeOut.setRepeatCount(0);
-		fadeOut.setRepeatMode(Animation.REVERSE);
-		return fadeOut;
-	}
 	public AlphaAnimation fadeIn(){
 		AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);
 		fadeIn.setDuration(1000);
@@ -166,7 +154,7 @@ public class Tools {
 	/**
 	 * Action Bar on item selected.
 	 */
-	public boolean actionBarItemSelected(MenuItem item, Context context, Activity activity){
+	public boolean actionBarItemSelected(MenuItem item, Context context){
 		///prefs = context.getSharedPreferences("io.github.rob__.performancer", Context.MODE_PRIVATE);
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		int id = item.getItemId();
@@ -192,12 +180,18 @@ public class Tools {
 
 			Spanned msg_credits     = Html.fromHtml(
 				"<small>A simple application to monitor the performance and usage of a device.</small><br><br>" +
-				"Circular Progress Bar"     + "<br><i><small>by <a href='https://github.com/passsy/'>"                                                  + "passsy</a> "                 + "</small></i><br><br>" +
-				"Sliding Menu"              + "<br><i><small>by <a href='https://github.com/jfeinstein10/SlidingMenu'>"                                 + "jfeinstein10</a> "           + "</small></i><br><br>" +
-				"Definition Documentation"  + "<br><i><small>by <a href='http://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-proc-meminfo.html'>" + "Centos</a> "                 + "</small></i><br><br>" +
-				"Sensory Information"       + "<br><i><small>by <a href='http://developer.android.com/guide/topics/sensors/sensors_overview.html'>"     + "Android Developer Docs</a> " + "</small></i><br><br>" +
-				"Process Button"            + "<br><i><small>by <a href='https://github.com/dmytrodanylyk/'>"                                           + "Dymtro Danylyk</a> "         + "</small></i>");
-
+				"Android Open Source Project"   + "<br><i><small>by <a href='https://source.android.com/'>"                                                 + "Google"                          + "</a> </small></i><br><br>" +
+				"Definition Documentation"      + "<br><i><small>by <a href='http://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-proc-meminfo.html'>" + "Centos"                          + "</a> </small></i><br><br>" +
+				"Sensory Information"           + "<br><i><small>by <a href='http://developer.android.com/guide/topics/sensors/sensors_overview.html'>"     + "Android Developer Docs"          + "</a> </small></i><br><br>" +
+				"Sensory Fusion"                + "<br><i><small>by <a href='https://www.youtube.com/watch?v=C7JQ7Rpwn2k'>"                                 + "GoogleTechTalks"                 + "</a> </small></i><br><br>" +
+				"Circular Progress Bar"         + "<br><i><small>by <a href='https://github.com/passsy/'>"                                                  + "Pascal Welsch (passsy)"          + "</a> </small></i><br><br>" +
+				"Sliding Menu"                  + "<br><i><small>by <a href='https://github.com/jfeinstein10/'>"                                            + "Jeremy Feinstein (jfeinstein10)" + "</a> </small></i><br><br>" +
+				"Process Button"                + "<br><i><small>by <a href='https://github.com/dmytrodanylyk/'>"                                           + "Dymtro Danylyk (dmytrodanylyk)"  + "</a> </small></i><br><br>" +
+				"Roboto Text View"              + "<br><i><small>by <a href='https://github.com/johnkil'>"                                                  + "Evgeny Shishkin (johnkil)"       + "</a> </small></i><br><br>" +
+				"EazeGraph"                     + "<br><i><small>by <a href='https://github.com/blackfizz'>"                                                + "Paul Cech (blackfizz)"           + "</a> </small></i><br><br>" +
+				"Nine Old Androids"             + "<br><i><small>by <a href='https://github.com/JakeWharton'>"                                              + "Jake Wharton (JakeWharton)"      + "</a> </small></i><br><br>" +
+				"Pager Sliding Tab Strip"       + "<br><i><small>by <a href='https://github.com/astuetz'>"                                                  + "Andreas St\u00FCtz (astuetz)"    + "</a> </small></i>"
+			);
 		    Spanned title_sensors = Html.fromHtml(
 				"Sensory Information<br><small><tt>from Android Developer Docs</tt></small>");
 
@@ -245,12 +239,25 @@ public class Tools {
 	 */
 	public void MsgBox(String text, String title, Context context){
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(new ContextThemeWrapper(context, (prefs.getString("theme", "col").equals("col")) ? android.R.style.Theme_Holo_Dialog : android.R.style.Theme_Holo_Light_Dialog));
-		dlgAlert.setTitle(title);
-		dlgAlert.setMessage(text);
-		dlgAlert.setCancelable(true);
-		dlgAlert.setPositiveButton("Okay", null);
-		dlgAlert.create().show();
+		AlertDialog.Builder a  = new AlertDialog.Builder(new ContextThemeWrapper(context, (prefs.getString("theme", "col").equals("col")) ? android.R.style.Theme_Holo_Dialog : android.R.style.Theme_Holo_Light_Dialog));
+		a.setTitle(title);
+		a.setMessage(text);
+		a.setCancelable(true);
+		a.setPositiveButton("Okay", null);
+		a.create().show();
+	}
+
+	/**
+	 * Displays HTML compatible alert dialog.
+	 */
+	public void MsgBox(Spanned text, Spanned title, Context context){
+		prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		AlertDialog.Builder a  = new AlertDialog.Builder(new ContextThemeWrapper(context, (prefs.getString("theme", "col").equals("col")) ? android.R.style.Theme_Holo_Dialog : android.R.style.Theme_Holo_Light_Dialog));
+		a.setTitle(title);
+		a.setMessage(text);
+		a.setCancelable(true);
+		a.setPositiveButton("Okay", null);
+		a.create().show();
 	}
 
 	/**

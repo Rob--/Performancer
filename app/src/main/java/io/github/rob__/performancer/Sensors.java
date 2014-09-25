@@ -55,7 +55,12 @@ public class Sensors extends Activity{
 		lvSensors.setOnItemClickListener(new OnItemClickListener() {
 		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		    	String t = lvSensors.getItemAtPosition(position).toString();
-		    	
+
+			    // u200B                == Zero-Width
+			    // Linear Acceleration  == \u200B * 0
+			    // Acceleration         == \u200B * 1
+			    // Gravity              == \u200B * 2
+
 		    	// Acceleration
 		    	if(t.contains("Accel") && !t.contains("Linear")){
 		    		tools.MsgBox("Measures (non-linear) acceleration force along the x/y/z axis (including gravity).", prefs.getString("accelerometer name", "Accelerometer"), Sensors.this);
@@ -65,14 +70,13 @@ public class Sensors extends Activity{
 		    	// Linear Accelerator
 		    	} else if(t.contains("Linear") && !t.contains("Gravity")){
 		    		tools.MsgBox("Measures the acceleration force in m/s\u00B2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity.\n\nWhen the device is stationary this value will match the acceleration values.", prefs.getString("linear acceleration name", "Linear Acceleration"), Sensors.this);
-		    	} else if(t.contains("m/s") && t.contains("\u200B\u200B")){
-		    		// Checks for one invisible letter, two is correct, one is gravity.
+		    	} else if(t.contains("m/s") && t.contains("\u200B") && !t.contains("\u200B\u200B")){
 		    		tools.MsgBox("The measure of the acceleration force in m/s\u00B2 that is applied to a device on all three physical axes (x, y, and z), excluding the force of gravity.\n\nWhen the device is stationary this value will match the acceleration values.", prefs.getString("linear acceleration name", "Linear Acceleration"), Sensors.this);
 		    	
 		    	// Gravity
 		    	} else if(t.contains("Gravity")){
 		    		tools.MsgBox("Measures the force of gravity in m/s\u00B2 that is applied to a device on all three physical axes (x, y, z).", prefs.getString("gravity name", "Gravity"), Sensors.this);
-		    	} else if(t.contains("m/s\u00B2")){
+		    	} else if(t.contains("m/s\u00B2") && t.contains("\u200B\u200B")){
 		    		tools.MsgBox("The measure of the force of gravity in m/s\u00B2 that is applied to the x/y/z axes.", prefs.getString("gravity name", "Gravity"), Sensors.this);
 		    	
 		    	// Magnet
@@ -179,7 +183,7 @@ public class Sensors extends Activity{
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		tools.actionBarItemSelected(item, this, Sensors.this);
+		tools.actionBarItemSelected(item, this);
 		return super.onOptionsItemSelected(item);
 	}
 	

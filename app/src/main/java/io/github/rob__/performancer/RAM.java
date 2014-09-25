@@ -208,7 +208,7 @@ public class RAM extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		tools.actionBarItemSelected(item, this, RAM.this);
+		tools.actionBarItemSelected(item, this);
 		return super.onOptionsItemSelected(item);
 	}
 	

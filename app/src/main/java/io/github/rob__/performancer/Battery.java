@@ -214,7 +214,7 @@ public class Battery extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		tools.actionBarItemSelected(item, this, Battery.this);
+		tools.actionBarItemSelected(item, this);
 		return super.onOptionsItemSelected(item);
 	}
 	

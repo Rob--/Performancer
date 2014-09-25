@@ -48,9 +48,9 @@ public class InfoDevice {
 	
 	public ArrayAdapter<String> populateListView(Context context){
 		adapter = null;
-		info = new ArrayList<String>();
+		info = new ArrayList<>();
 
-		if(prefs.getBoolean("build updated", false) == false){
+		if(!prefs.getBoolean("build updated", false)){
 			updateBuildPrefs();
 			prefs.edit().putBoolean("build updated", true).apply();
 		}
@@ -60,40 +60,44 @@ public class InfoDevice {
 
         // Commence beautiful code.
 		if(prefs.getBoolean("advanced", false)){
-			info.add("Board: " 				 + prefs.getString("build board"				, "Unknown"));
-			info.add("Bootloader: " 		 + prefs.getString("build bootloader"			, "Unknown"));
-			info.add("Brand: "				 + prefs.getString("build brand"				, "Unknown"));
-			info.add("CPU ABI: " 			 + prefs.getString("build cpu_abi"				, "Unknown"));
-			info.add("CPU ABI 2: " 			 + prefs.getString("build cdevice"				, "Unknown"));
-			info.add("Device: " 			 + prefs.getString("build device"				, "Unknown"));
-			info.add("Display: " 			 + prefs.getString("build display"				, "Unknown"));
-			info.add("Fingerprint: " 		 + prefs.getString("build fingerprint"			, "Unknown"));
-			info.add("Hardware: " 			 + prefs.getString("build hardware"				, "Unknown"));
-			info.add("Host: " 				 + prefs.getString("build host"					, "Unknown"));
-			info.add("ID: " 				 + prefs.getString("build id"					, "Unknown"));
-			info.add("Manufacturer: "   	 + prefs.getString("build manufacturer"			, "Unknown"));
-			info.add("Model: " 				 + prefs.getString("build model"				, "Unknown"));
-			info.add("Product: " 		 	 + prefs.getString("build product"				, "Unknown"));
-			info.add("Radio: " 		 		 + prefs.getString("build radio"				, "Unknown"));
-			info.add("Serial: " 	 		 + prefs.getString("build serial"				, "Unknown"));
-			info.add("Tags: " 		 		 + prefs.getString("build tags"					, "Unknown"));
-			info.add("Time: "				 + String.valueOf(Build.TIME));
-			info.add("Type: " 				 + prefs.getString("build type"					, "Unknown"));
-			info.add("User: " 				 + prefs.getString("build user"					, "Unknown"));
-			info.add("Version Codename: " 	 + prefs.getString("build version codename"		, "Unknown"));
-			info.add("Version Incremental: " + prefs.getString("build version incremental"	, "Unknown"));
-			info.add("Version Release: " 	 + prefs.getString("build version release"		, "Unknown"));
-			info.add("Version SDK: " 		 + prefs.getInt	  ("build version sdk"			, -1	   ));
+			info.add("OS Name: "             + System.getProperty   ("os.name"));
+			info.add("OS Version: "          + System.getProperty   ("os.version"));
+			info.add("OS Architecture: "     + System.getProperty   ("os.arch"));
+			info.add("Board: " 				 + prefs.getString      ("build board"				    , "Unknown"));
+			info.add("Bootloader: " 		 + prefs.getString      ("build bootloader"			    , "Unknown"));
+			info.add("Brand: "				 + prefs.getString      ("build brand"				    , "Unknown"));
+			info.add("CPU ABI: " 			 + prefs.getString      ("build cpu_abi"				, "Unknown"));
+			info.add("CPU ABI 2: " 			 + prefs.getString      ("build cdevice"				, "Unknown"));
+			info.add("Device: " 			 + prefs.getString      ("build device"				    , "Unknown"));
+			info.add("Display: " 			 + prefs.getString      ("build display"				, "Unknown"));
+			info.add("Fingerprint: " 		 + prefs.getString      ("build fingerprint"			, "Unknown"));
+			info.add("Hardware: " 			 + prefs.getString      ("build hardware"				, "Unknown"));
+			info.add("Host: " 				 + prefs.getString      ("build host"					, "Unknown"));
+			info.add("ID: " 				 + prefs.getString      ("build id"					    , "Unknown"));
+			info.add("Manufacturer: "   	 + prefs.getString      ("build manufacturer"			, "Unknown"));
+			info.add("Model: " 				 + prefs.getString      ("build model"				    , "Unknown"));
+			info.add("Product: " 		 	 + prefs.getString      ("build product"				, "Unknown"));
+			info.add("Radio: " 		 		 + prefs.getString      ("build radio"				    , "Unknown"));
+			info.add("Serial: " 	 		 + prefs.getString      ("build serial"				    , "Unknown"));
+			info.add("Tags: " 		 		 + prefs.getString      ("build tags"					, "Unknown" ));
+			info.add("Time: "				 + String.valueOf       (Build.TIME                                 ));
+			info.add("Type: " 				 + prefs.getString      ("build type"					, "Unknown" ));
+			info.add("User: " 				 + prefs.getString      ("build user"					, "Unknown" ));
+			info.add("Version Codename: " 	 + prefs.getString      ("build version codename"		, "Unknown" ));
+			info.add("Version Incremental: " + prefs.getString      ("build version incremental"    , "Unknown" ));
+			info.add("Version Release: " 	 + prefs.getString      ("build version release"		, "Unknown" ));
+			info.add("Version SDK: " 		 + prefs.getInt	        ("build version sdk"			, -1	    ));
 		} else {
-			info.add("Brand: "				 + prefs.getString("build brand"				, "Unknown"));
-			info.add("CPU ABI: " 			 + prefs.getString("build cpu_abi"				, "Unknown"));
-			info.add("Device: " 			 + prefs.getString("build device"				, "Unknown"));
-			info.add("Display: " 			 + prefs.getString("build display"				, "Unknown"));
-			info.add("ID: " 				 + prefs.getString("build id"					, "Unknown"));
-			info.add("Manufacturer: "   	 + prefs.getString("build manufacturer"			, "Unknown"));
-			info.add("Model: " 				 + prefs.getString("build model"				, "Unknown"));
-			info.add("Version Release: " 	 + prefs.getString("build version release"		, "Unknown"));
+			info.add("Brand: "				 + prefs.getString      ("build brand"				    , "Unknown" ));
+			info.add("CPU ABI: " 			 + prefs.getString      ("build cpu_abi"				, "Unknown" ));
+			info.add("Device: " 			 + prefs.getString      ("build device"				    , "Unknown" ));
+			info.add("Display: " 			 + prefs.getString      ("build display"				, "Unknown" ));
+			info.add("ID: " 				 + prefs.getString      ("build id"					    , "Unknown" ));
+			info.add("Manufacturer: "   	 + prefs.getString      ("build manufacturer"			, "Unknown" ));
+			info.add("Model: " 				 + prefs.getString      ("build model"				    , "Unknown" ));
+			info.add("Version Release: " 	 + prefs.getString      ("build version release"		, "Unknown" ));
 		}
+
 		if(isFeatureAvailable(context, PackageManager.FEATURE_WIFI)) {
 			info.add("--");
 			info.add("WiFi:");
@@ -105,21 +109,28 @@ public class InfoDevice {
 			}
 			configs = wm.getConfiguredNetworks();
 			if(configs != null) {
-				info.add("Saved WiFi Networks:");
+				info.add("Saved networks:");
 				for (WifiConfiguration c : configs) {
 					info.add("    " + c.toString().split("\"")[1]);
 				}
 			}
 			results = wm.getScanResults();
+			List<String> added = new ArrayList<>();
 			if(results.size() != 0) {
-				info.add("Nearby WiFi Networks:");
+				info.add("Nearby networks:");
 				for (ScanResult result : results) {
-					info.add("    Strength: " + String.valueOf(wm.calculateSignalLevel(result.level, 100)) + "% > " + result.SSID);
+					if(!added.contains(result.SSID)) {
+						info.add("    " + String.valueOf(wm.calculateSignalLevel(result.level, 100)) + "% > " + result.SSID);
+						added.add(result.SSID);
+					}
+					// the added list stops duplicates.
+					// yes, this is necessary, for some
+					// reason getScanResults() returns dupes.
 				}
 			}
 		}
 		
-		adapter = new ArrayAdapter<String>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
+		adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
     	return adapter;
 	}
 	
@@ -153,15 +164,11 @@ public class InfoDevice {
 	}
 
 	/**
-	 * Check if a feature is available.
-	 * http://stackoverflow.com/users/220102/tim-goss
-	 * http://stackoverflow.com/questions/5263068/how-to-get-android-device-features-using-package-manager/5264328#5264328
+	 * Checks for feature.
+	 * @return Boolean.
 	 */
 	public boolean isFeatureAvailable(Context context, String feature) {
-		if(context.getPackageManager().hasSystemFeature(feature)){
-			return true;
-		}
-		return false;
+		return (context.getPackageManager().hasSystemFeature(feature));
 	}
 
 	/**
@@ -173,11 +180,9 @@ public class InfoDevice {
 		if (ByteOrder.nativeOrder().equals(ByteOrder.LITTLE_ENDIAN)) {
 			ip = Integer.reverseBytes(ip);
 		}
-		byte[] ipByteArray = BigInteger.valueOf(ip).toByteArray();
 		try {
-			return InetAddress.getByAddress(ipByteArray).getHostAddress();
-		} catch (UnknownHostException ex) {
-			// Cannot get host address (exception -> unknown).
+			return InetAddress.getByAddress(BigInteger.valueOf(ip).toByteArray()).getHostAddress();
+		} catch (UnknownHostException e) {
 			return null;
 		}
 	}

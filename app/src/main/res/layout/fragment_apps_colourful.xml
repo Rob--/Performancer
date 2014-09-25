@@ -38,11 +38,20 @@
 		android:textColor="#ffffff"
 		android:layout_alignParentBottom="true"/>-->
 
+	<Button
+		android:id="@+id/btnSwitchApps"
+		android:background="#2980b9"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/showRunning"
+		android:textColor="#ffffff"
+		android:layout_alignParentBottom="true" />
+
 	<ListView
 		android:id="@+id/lvApps"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent" />
+		android:layout_height="match_parent"
+		android:layout_above="@+id/btnSwitchApps"/>
 		<!--android:layout_above="@+id/btnDetailsApps"-->
-
 
 </RelativeLayout>

@@ -205,7 +205,7 @@ public class CPU extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		tools.actionBarItemSelected(item, this, CPU.this);
+		tools.actionBarItemSelected(item, this);
 		return super.onOptionsItemSelected(item);
 	}
 	

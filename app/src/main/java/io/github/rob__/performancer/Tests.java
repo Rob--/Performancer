@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,7 +18,6 @@ import com.dd.processbutton.iml.ActionProcessButton;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.List;
 import java.util.Vector;
 
 import io.github.rob__.performancer.info.InfoRAM;
@@ -38,10 +36,7 @@ public class Tests extends Activity {
 	boolean cont = false; // checks if PiCont test should run
 	boolean consuming = false; // If RAM is being consumed and activities switch, stop dat shizzle.
 	boolean contRAM = false; // checks if consumeRamSlowly should run
-	
-	ArrayAdapter<String> adapter;
-	List<String> info;
-	
+
 	Tools tools = new Tools();
 	
 	@Override
@@ -171,7 +166,7 @@ public class Tests extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		tools.actionBarItemSelected(item, this, Tests.this);
+		tools.actionBarItemSelected(item, this);
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -223,7 +218,6 @@ public class Tests extends Activity {
 	 */
 	
 	int lastInt = 2;
-	BigDecimal series;
 	BigDecimal four = new BigDecimal(4);
 	BigDecimal pi = new BigDecimal(3);
 	
@@ -446,7 +440,7 @@ public class Tests extends Activity {
 	 * 
 	 */
 	
-	Vector<byte[]> v = new Vector<byte[]>();
+	Vector<byte[]> v = new Vector<>();
 	InfoRAM infoRAM = new InfoRAM();
 	DecimalFormat formatter = new DecimalFormat("###,###,###,###,###,###");
 	

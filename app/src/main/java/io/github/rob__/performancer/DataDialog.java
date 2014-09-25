@@ -1,6 +1,5 @@
 package io.github.rob__.performancer;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -34,29 +33,19 @@ public class DataDialog {
 			@Override
 			public void onProgressChanged(SeekBar seekBark, int progress, boolean fromUser) {
 				if( seekbar.getProgress()   < 50    )                                       { seekbar.setProgress(50    ); }
+				/*
 				if((seekbar.getProgress()   > 450   )   && (seekbar.getProgress() < 550 ))  { seekbar.setProgress(500   ); }
 				if((seekbar.getProgress()   > 950   )   && (seekbar.getProgress() < 1050))  { seekbar.setProgress(1000  ); }
 				if((seekbar.getProgress()   > 1450  )   && (seekbar.getProgress() < 1550))  { seekbar.setProgress(1500  ); }
 				if( seekbar.getProgress()   > 1950  )                                       { seekbar.setProgress(2000  ); }
-
+				*/
 				ms.setText(String.valueOf(seekbar.getProgress()) + " ms");
 				prefs.edit().putInt("delay", seekbar.getProgress()).apply();
 			}
 
-			@Override public void onStartTrackingTouch(SeekBar arg0) {}
-			@Override public void onStopTrackingTouch(SeekBar arg0) {}
+			@Override public void onStartTrackingTouch  (SeekBar arg0) {}
+			@Override public void onStopTrackingTouch   (SeekBar arg0) {}
 		};
 		seekbar.setOnSeekBarChangeListener(sbListener);
-
-	}
-	
-	public void MsgBox(String text, String title, Context context, int dialog_theme){
-		AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(new ContextThemeWrapper(context, dialog_theme));
-		dlgAlert.setTitle           (title);
-		dlgAlert.setMessage         (text);
-		dlgAlert.setCancelable      (true);
-		dlgAlert.setPositiveButton  ("Okay", null);
-		dlgAlert.create             ()
-				.show               ();
 	}
 }

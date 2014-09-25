@@ -29,9 +29,8 @@
 			android:defaultValue="c"/>
 
 		<CheckBoxPreference
-			android:title="Show Advanced Details"
-		    android:summaryOn="When possible, show a more advanced range of details."
-		    android:summaryOff="When possible, do not show a more advanced range of details."
+			android:title="Advanced details"
+		    android:summary="If checked, advanced details will be shown when possible."
 		    android:key="advanced"
 			android:defaultValue="false"/>
 

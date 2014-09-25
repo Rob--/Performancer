@@ -29,7 +29,7 @@ public class InfoStorage {
 	 */
 	public double getAvailInternal(){
 		if(Build.VERSION.SDK_INT >= 18) {
-			return ((long) internal.getFreeBlocksLong() * (long) internal.getBlockSizeLong()) / 1024.0;
+			return (internal.getFreeBlocksLong() * internal.getBlockSizeLong()) / 1024.0;
 		} else {
 			return ((long) internal.getFreeBlocks() * (long) internal.getBlockSize()) / 1024.0;
 		}
@@ -40,7 +40,7 @@ public class InfoStorage {
 	 */
 	public double getTotalInternal(){
 		if(Build.VERSION.SDK_INT >= 18) {
-			return ((long) internal.getBlockSizeLong() * (long) internal.getBlockCountLong()) / 1024.0;
+			return (internal.getBlockSizeLong() * internal.getBlockCountLong()) / 1024.0;
 		} else {
 			return ((long) internal.getBlockSize() * (long) internal.getBlockCount()) / 1024.0;
 		}
@@ -62,14 +62,14 @@ public class InfoStorage {
 
 	public ArrayAdapter<String> populateListView(Context context){
 		adapter = null;
-		info = new ArrayList<String>();
+		info = new ArrayList<>();
 
 		info.add("Internal Storage:");
 		info.add("    Total: " + validateValue(getTotalInternal()                       , false));
-		info.add("    Avail: " + validateValue(getAvailInternal()                       , false));
+		info.add("    Available: " + validateValue(getAvailInternal()                   , false));
 		info.add("    Used: " + validateValue(getTotalInternal() - getAvailInternal()   , false));
 
-		adapter = new ArrayAdapter<String>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
+		adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
 		return adapter;
 	}
 

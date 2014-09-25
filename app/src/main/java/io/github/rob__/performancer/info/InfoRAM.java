@@ -38,8 +38,6 @@ public class InfoRAM {
 	
 	/**
 	 * Gets low memory threshold in KB.
-	 * @return 
-	 * @return long
 	 */
 	public long getMemThreshold(ActivityManager ACTIVITY_SERVICE, boolean kB){
 		MemoryInfo mi = new MemoryInfo();
@@ -52,19 +50,6 @@ public class InfoRAM {
 			return mi.threshold / 1000000L;
 		}
 	}
-	
-	/**
-	 * Gets low memory state boolean.
-	 * @return boolean
-	 */
-	public boolean getLowMemState(ActivityManager ACTIVITY_SERVICE){
-		MemoryInfo mi = new MemoryInfo();
-		activityManager = ACTIVITY_SERVICE;
-		activityManager.getMemoryInfo(mi);
-		activityManager.getMemoryInfo(mi);
-		return mi.lowMemory;
-	}
-	
 	
 	private Runnable mempr = new Runnable(){
 		@Override
@@ -116,13 +101,6 @@ public class InfoRAM {
 		}
 	}
 	
-	public String getMemTotal(){
-		Thread memInfo = new Thread(mempr);
-		memInfo.run();
-		
-		return memTotal;
-	}
-	
 	public String getMemFree(){
 		Thread memInfo = new Thread(mempr);
 		memInfo.run();
@@ -138,7 +116,7 @@ public class InfoRAM {
 	public ArrayAdapter<String> populateListView(Context context){
 		reader = null;
 		adapter = null;
-		info = new ArrayList<String>();
+		info = new ArrayList<>();
 		if(prefs.getBoolean("advanced", false)){
 	    	try {
 	        	reader = new RandomAccessFile("/proc/meminfo", "r");
@@ -151,21 +129,21 @@ public class InfoRAM {
 				    reader.close();
 			    }
 	        	reader.close();
-	        	adapter = new ArrayAdapter<String>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
+	        	adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
 	        	return adapter;
 	    	} catch (IOException e) {
 	        	e.printStackTrace();
 	    	}
 	    	info.add("\u200B");
-	    	adapter = new ArrayAdapter<String>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
+	    	adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
         	return adapter;
 		} else {
 			double highTotal    = 0;
 			double highFree     = 0;
 			double lowTotal     = 0;
 			double lowFree      = 0;
-			double high         = 0;
-			double low          = 0;
+			double high;
+			double low;
 
 			try {
 				reader = new RandomAccessFile("/proc/meminfo", "r");
@@ -200,7 +178,7 @@ public class InfoRAM {
 				info.add((prefs.getString("data unit", "kb").equals("kb")) ? "Mem Threshold: " + String.valueOf(formatter.format(prefs.getLong("Memory Threshold kB", 1))) + " kB" : "Mem Threshold: " + String.valueOf(formatter.format(prefs.getLong("Memory Threshold MB", 1))) + " MB");
 
 				reader.close();
-				adapter = new ArrayAdapter<String>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
+				adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
 	        	return adapter;
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -210,7 +188,7 @@ public class InfoRAM {
 	}
 
 	private String simplify(String string, String line, boolean onlyNumber) {
-		int number = 0;
+		int number;
 		number = Integer.parseInt(line.replace(" ", "").replace("kB",  "").substring(line.indexOf(":") + 1));
 		if(!onlyNumber){
 			return (prefs.getString("data unit", "mb").equals("mb")) ? string + ": " + String.valueOf(formatter.format(number / 1000)) + " MB" : string + ": " + String.valueOf(formatter.format(number)) + " kB";

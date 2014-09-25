@@ -1,6 +1,5 @@
 package io.github.rob__.performancer.storage;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.TransitionDrawable;
@@ -8,9 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -20,14 +19,11 @@ import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.communication.IOnItemFocusChangedListener;
 import org.eazegraph.lib.models.PieModel;
 
-import java.text.DecimalFormat;
-
 import io.github.rob__.performancer.R;
 import io.github.rob__.performancer.Tools;
 import io.github.rob__.performancer.storage.info.InfoStorage;
 
-
-public class Storage extends Activity {
+public class StorageFragment extends android.support.v4.app.Fragment {
 
 	SharedPreferences prefs;
 
@@ -43,53 +39,53 @@ public class Storage extends Activity {
 	ListView lvStorage;
 	TransitionDrawable transition;
 
-	DecimalFormat d = new DecimalFormat("###,###,###.###");
-
 	Tools tools = new Tools();
 	InfoStorage infoStorage = new InfoStorage();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-	    //prefs = getSharedPreferences(getApplicationContext().getPackageName(), Context.MODE_PRIVATE);
-	    prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	View v;
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		//prefs = getSharedPreferences(getApplicationContext().getPackageName(), Context.MODE_PRIVATE);
+		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
-	    if(prefs.getString("theme", "col").equals("col")){
-		    // Matching Action Bars
-		    //setTheme(R.style.AppThemeColourful);
-		    setContentView(R.layout.activity_storage_colourful);
-		    rlStorage   = (RelativeLayout) findViewById(R.id.rlStorage);
-		    transition  = (TransitionDrawable) rlStorage.getBackground();
-	    } else {
-		    //setTheme(R.style.AppThemeMinimalistic);
-		    setContentView(R.layout.activity_storage_minimalistic);
-	    }
+		if(prefs.getString("theme", "col").equals("col")){
+			// Matching Action Bars
+			//setTheme(R.style.AppThemeColourful);
+			v = inflater.inflate(R.layout.fragment_storage_colourful, container, false);
+			rlStorage   = (RelativeLayout) v.findViewById(R.id.rlStorage);
+			transition  = (TransitionDrawable) rlStorage.getBackground();
+		} else {
+			//setTheme(R.style.AppThemeMinimalistic);
+			v = inflater.inflate(R.layout.fragment_storage_minimalistic, container, false);
+		}
 
-	    infoStorage .init(this);
-	    // No sliding menu - thanks to TabActivity
-	    // we can attach it directly
+		infoStorage.init(v.getContext());
+		// No sliding menu - thanks to TabActivity
+		// we can attach it directly
 
-	    // Loads all views.
-	    lblUsageStorage     = (TextView)    findViewById(R.id.lblUsageStorage   );
-	    pcStorage           = (PieChart)    findViewById(R.id.pcStorage         );
-	    btnDetailsStorage   = (Button)      findViewById(R.id.btnDetailsStorage );
-	    lvStorage           = (ListView)    findViewById(R.id.lvStorage         );
-	    lvStorage           .setVisibility(View.GONE);
+		// Loads all views.
+		lblUsageStorage     = (TextView)    v.findViewById(R.id.lblUsageStorage);
+		pcStorage           = (PieChart)    v.findViewById(R.id.pcStorage);
+		btnDetailsStorage   = (Button)      v.findViewById(R.id.btnDetailsStorage);
+		lvStorage           = (ListView)    v.findViewById(R.id.lvStorage);
+		lvStorage           .setVisibility(View.GONE);
 
-	    initiatePieChart();
-	    btnDetailsStorage.setOnClickListener(new View.OnClickListener() {
-		    @Override
-		    public void onClick(View v) {
-			    animate();
-		    }
-	    });
-    }
+		initiatePieChart();
+		btnDetailsStorage.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				animate();
+			}
+		});
+
+		return v;
+	}
 
 	Runnable update = new Runnable() {
 		@Override
 		public void run() {
 			lvState = lvStorage .onSaveInstanceState();
-			lvStorage           .setAdapter(infoStorage.populateListView(Storage.this));
+			lvStorage           .setAdapter(infoStorage.populateListView(getActivity().getApplicationContext()));
 			lvStorage           .onRestoreInstanceState(lvState);
 		}
 	};
@@ -104,7 +100,7 @@ public class Storage extends Activity {
 	}
 
 	public void animate() {
-		runOnUiThread(new Runnable() {
+		getActivity().runOnUiThread(new Runnable() {
 			public void run() {
 				if (!detailsExpanded) {
 					updateStart();
@@ -139,7 +135,7 @@ public class Storage extends Activity {
 		pcStorage.clearChart();
 		pcStorage.addPieSlice(new PieModel("Available Space", (float) infoStorage.getAvailInternal(), (prefs.getString("theme", "col").equals("col") ? Color.parseColor("#3498db") : Color.parseColor("#bdc3c7"))));
 		pcStorage.addPieSlice(new PieModel("Used Space"     , (float) infoStorage.getUsedInternal() , (prefs.getString("theme", "col").equals("col") ? Color.parseColor("#2ecc71") : Color.parseColor("#b0b0b0"))));
-		pcStorage.setInnerPaddingColor(Color.parseColor((prefs.getString("theme", "col").equals("col") ? "#00000000" : "#ffffff")));
+		pcStorage.setInnerPaddingColor(prefs.getString("theme", "col").equals("col") ?  getResources().getColor(R.color.navy_blue) : Color.parseColor("#00000000"));
 		pcStorage.setUseCustomInnerValue        (true);
 		pcStorage.setAutoCenterInSlice          (false);
 		pcStorage.setCurrentItem                (1);
@@ -156,22 +152,7 @@ public class Storage extends Activity {
 		pcStorage.startAnimation();
 	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.storage, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+	public static StorageFragment newInstance() {
+		return new StorageFragment();
+	}
 }
