@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -147,16 +146,14 @@ public class Battery extends Activity {
         }
     };
     
-    public void update1Start(){
-    	handler.postDelayed(update1, 1);
-    }
+    public void update1Start(){	handler.post(update1); }
     
     public void update1Stop(){
     	handler.removeCallbacks(update1);
     }
     
     public void update2Start(){
-    	handler.postDelayed(update2, 1);
+    	handler.post(update2);
     }
     
     public void update2Stop(){
@@ -221,7 +218,6 @@ public class Battery extends Activity {
 	@Override
 	public void onAttachedToWindow() {
 	    super.onAttachedToWindow();
-	    Window window = getWindow();
-	    window.setFormat(PixelFormat.RGBA_8888);
+	    getWindow().setFormat(PixelFormat.RGBA_8888);
 	}
 }

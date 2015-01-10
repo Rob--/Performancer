@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,22 +66,21 @@ public class InfoCPU {
 			int coreOnline = 0;
 			int online = getCoreOnlineCount();
 			do{
-				//info.add("  > Core " + String.valueOf(core) + ": Online, " + String.valueOf(usageCPU.getCpuUsage(core)) + "%");
-				info.add("  > Core " + String.valueOf(core) + ": Online");
+				//info.add("    Core " + String.valueOf(core) + ": Online, " + String.valueOf(usageCPU.getCpuUsage(core)) + "%");
+				info.add("    Core " + String.valueOf(core) + ": Online");
 				coreOnline++;
 				core++;
 			}while(coreOnline != online);
 			do{
-				info.add("  > Core " + String.valueOf(core) + ": Offline");
+				info.add("    Core " + String.valueOf(core) + ": Offline");
 				core++;
 			}while(core != getCoreCount());
-			info.add("Max Clock Speed: "    + String.valueOf(prefs.getInt("maxFreq", getMaxFreq())) + " MHz");
-			info.add("Min Clock Speed: "    + String.valueOf(prefs.getInt("minFreq", getMinFreq())) + " MHz");
+		    info.add("Clock Speed: "        + String.valueOf(prefs.getInt("minFreq", getMinFreq()) + " MHz - " + String.valueOf(prefs.getInt("maxFreq", getMaxFreq()) + " MHz")));
 			info.add("Architecture: "       + prefs.getString("os.arch", System.getProperty("os.arch")));
 			info.add("Model: "              + prefs.getString("model", getModel()));
 		    double t = getCpuTemp();
 		    if(!(t == 0.0)){
-			    info.add("Temperature: " + String.valueOf(t));
+			    info.add("Temperature: " + ((prefs.getString("temp unit", "c").equals("c")) ? (String.valueOf(t) + "\u2103") : String.valueOf(round(((t * 1.8) + 32), 2) + "\u2109")));
 		    }
 			
 			adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
@@ -218,12 +219,17 @@ public class InfoCPU {
 		    		return user + system + IOW + IRQ;
 				}
 			}
-    		process.destroy();
-    		isr.close();
-    		reader.close();
+    		process .destroy();
+    		isr     .close();
+    		reader  .close();
     	} catch (Exception e){
     		e.printStackTrace();
     	}
     	return 0;
     }
+
+	public static double round(double value, int places) {
+		if (places < 0) throw new IllegalArgumentException();
+		return new BigDecimal(value).setScale(places, RoundingMode.HALF_UP).doubleValue();
+	}
 }

@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -100,10 +99,10 @@ public class RAM extends Activity {
 		    		tools.MsgBox("The amount of physical RAM used as cache memory.", "Cached", RAM.this);
 		    		break;
 		    	case "Active":
-		    		tools.MsgBox("The total amount of buffer or page cache memory, that is in active use.  is memory that has been recently used and is usually not reclaimed for other purposes.", "Active", RAM.this);
+		    		tools.MsgBox("The total amount of buffer or page cache memory, that is in active use. It's memory that has been recently used and is usually not reclaimed for other purposes.", "Active", RAM.this);
 		    		break;
 		    	case "Inactive":
-		    		tools.MsgBox("The total amount of buffer or page cache memory that is free and available.  is memory that has not been recently used and can be reclaimed for other purposes.", "Inactive", RAM.this);
+		    		tools.MsgBox("The total amount of buffer or page cache memory that is free and available. It's memory that has not been recently used and can be reclaimed for other purposes.", "Inactive", RAM.this);
 		    		break;
 		    	case "Kernel":
 		    		tools.MsgBox("The used amount of memory that is directly mapped into kernel space (used by the OS).", "Kernel", RAM.this);
@@ -152,9 +151,9 @@ public class RAM extends Activity {
     	}
     };
     
-    public void update1Start() { handler.postDelayed(update1, 1);  }
+    public void update1Start() { handler.post(update1);  }
     public void update1Stop () { handler.removeCallbacks(update1); }
-    public void update2Start() { handler.postDelayed(update2, 1);  }
+    public void update2Start() { handler.post(update2);  }
     public void update2Stop (){
     	handler.removeCallbacks(update2);
     }
@@ -216,7 +215,6 @@ public class RAM extends Activity {
 	@Override
 	public void onAttachedToWindow() {
 	    super.onAttachedToWindow();
-	    Window window = getWindow();
-	    window.setFormat(PixelFormat.RGBA_8888);
+	    getWindow().setFormat(PixelFormat.RGBA_8888);
 	}
 }

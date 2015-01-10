@@ -9,7 +9,6 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -173,8 +172,7 @@ public class Tests extends Activity {
 	@Override
 	public void onAttachedToWindow() {
 	    super.onAttachedToWindow();
-	    Window window = getWindow();
-	    window.setFormat(PixelFormat.RGBA_8888);
+	    getWindow().setFormat(PixelFormat.RGBA_8888);
 	}
 	
 	/*

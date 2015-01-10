@@ -15,7 +15,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.ListView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -83,7 +82,6 @@ public class Storage extends FragmentActivity {
 	@Override
 	public void onAttachedToWindow() {
 		super.onAttachedToWindow();
-		Window window = getWindow();
-		window.setFormat(PixelFormat.RGBA_8888);
+		getWindow().setFormat(PixelFormat.RGBA_8888);
 	}
 }

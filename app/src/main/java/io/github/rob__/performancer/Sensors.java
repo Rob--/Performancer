@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -44,7 +43,7 @@ public class Sensors extends Activity{
 		}
 		
 		infoSensors .init(this);
-		tools       .addMenu(Sensors.this, this);
+		tools       .addMenu(getApplicationContext(), this);
 		tools       .populateMenu((ListView) findViewById(R.id.menuItems), this, this, "Sensors");
 		tools       .toggle();
 		
@@ -155,7 +154,7 @@ public class Sensors extends Activity{
     };
     
     public void updateStart(){
-    	handler.postDelayed(update, 1);
+    	handler.post(update);
     }
     
     public void updateStop(){
@@ -190,7 +189,6 @@ public class Sensors extends Activity{
 	@Override
 	public void onAttachedToWindow() {
 	    super.onAttachedToWindow();
-	    Window window = getWindow();
-	    window.setFormat(PixelFormat.RGBA_8888);
+	    getWindow().setFormat(PixelFormat.RGBA_8888);
 	}
 }

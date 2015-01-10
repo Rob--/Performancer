@@ -52,7 +52,7 @@ public class Tools {
 	 * Populate the sliding menu.
 	 */
 	public void populateMenu(final ListView items, final Context context, final Activity activity, final String activityName){
-		items.setAdapter(new ArrayAdapter<>(context, R.layout.menu_item_layout, new String[] {"RAM", "CPU", "BATTERY", "STORAGE", "DEVICE", "SENSORS", "TESTS"}));
+		items.setAdapter(new ArrayAdapter<>(context, R.layout.menu_item_layout, new String[] {"RAM", "CPU", "BATTERY", "STORAGE", "DEVICE", "SENSORS", "NETWORK", "TESTS"}));
 		items.setClickable(true);
 		items.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -98,6 +98,16 @@ public class Tools {
 			  			activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 			  		}
 			  		break;
+
+				case "STORAGE":
+					if(activityName.equals("Storage")){
+						toggle();
+					} else {
+						activity.finish();
+						activity.startActivity(new Intent(context, Storage.class));
+						activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+					}
+					break;
 				 
 			  	case "DEVICE":
 			  		if(activityName.equals("Device")){
@@ -108,6 +118,16 @@ public class Tools {
 			  			activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 			  		}
 			  		break;
+
+				case "NETWORK":
+					if(activityName.equals("Network")){
+						toggle();
+					} else {
+						activity.finish();
+						activity.startActivity(new Intent(context, Network.class));
+						activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+					}
+					break;
 			  		
 			  	case "TESTS":
 			  		if(activityName.equals("Tests")){
@@ -119,15 +139,7 @@ public class Tools {
 			  		}
 				    break;
 
-				case "STORAGE":
-					if(activityName.equals("Storage")){
-						toggle();
-					} else {
-						activity.finish();
-						activity.startActivity(new Intent(context, Storage.class));
-						activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-					}
-					break;
+
 				}
 			}
 		});

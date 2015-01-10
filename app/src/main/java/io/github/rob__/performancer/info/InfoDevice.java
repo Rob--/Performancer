@@ -2,19 +2,10 @@ package io.github.rob__.performancer.info;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.widget.ArrayAdapter;
 
-import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.nio.ByteOrder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,15 +14,10 @@ import java.util.List;
 import io.github.rob__.performancer.R;
 
 public class InfoDevice {
-	
+
 	SharedPreferences prefs;
 	ArrayAdapter<String> adapter;
 	List<String> info;
-
-	WifiManager wm;
-	WifiInfo wi;
-	List<WifiConfiguration> configs;
-	List<ScanResult> results;
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
 	SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss a z (Z)");
@@ -39,14 +25,9 @@ public class InfoDevice {
 	public void init(Context context){
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		prefs.edit().putBoolean("build updated", false);
-
-		if(isFeatureAvailable(context, PackageManager.FEATURE_WIFI)) {
-			wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-			wi = wm.getConnectionInfo();
-		}
 	}
-	
-	public ArrayAdapter<String> populateListView(Context context){
+
+	public ArrayAdapter<String> populateListView(Context context) {
 		adapter = null;
 		info = new ArrayList<>();
 
@@ -98,42 +79,10 @@ public class InfoDevice {
 			info.add("Version Release: " 	 + prefs.getString      ("build version release"		, "Unknown" ));
 		}
 
-		if(isFeatureAvailable(context, PackageManager.FEATURE_WIFI)) {
-			info.add("--");
-			info.add("WiFi:");
-			if(wi.getSSID() != null) {
-				info.add("    " + (wi.getSSID().equals("<unknown ssid>") ? "Not connected." : "Connected to " + wi.getSSID() + ""));
-			}
-			if(!(wi.getIpAddress() < 5)) {
-				info.add("    IP Address: " + formatIP(wi.getIpAddress()));
-			}
-			configs = wm.getConfiguredNetworks();
-			if(configs != null) {
-				info.add("Saved networks:");
-				for (WifiConfiguration c : configs) {
-					info.add("    " + c.toString().split("\"")[1]);
-				}
-			}
-			results = wm.getScanResults();
-			List<String> added = new ArrayList<>();
-			if(results.size() != 0) {
-				info.add("Nearby networks:");
-				for (ScanResult result : results) {
-					if(!added.contains(result.SSID)) {
-						info.add("    " + String.valueOf(wm.calculateSignalLevel(result.level, 100)) + "% > " + result.SSID);
-						added.add(result.SSID);
-					}
-					// the added list stops duplicates.
-					// yes, this is necessary, for some
-					// reason getScanResults() returns dupes.
-				}
-			}
-		}
-		
 		adapter = new ArrayAdapter<>(context, (prefs.getString("theme", "col").equals("col")) ? R.layout.listview_layout_colourful : R.layout.listview_layout_minimalistic, info);
     	return adapter;
 	}
-	
+
 	public void updateBuildPrefs(){
 		if(!prefs.contains("build board"))		 	  	{ prefs.edit().putString("build board"					, Build.BOARD				).apply(); }
 		if(!prefs.contains("build bootloader"))	  	  	{ prefs.edit().putString("build bootloader"				, Build.BOOTLOADER			).apply(); }
@@ -161,29 +110,5 @@ public class InfoDevice {
 		
 		// Updated
 		prefs.edit().putBoolean("build updated", true).apply();
-	}
-
-	/**
-	 * Checks for feature.
-	 * @return Boolean.
-	 */
-	public boolean isFeatureAvailable(Context context, String feature) {
-		return (context.getPackageManager().hasSystemFeature(feature));
-	}
-
-	/**
-	 * Formats IP Address
-	 * http://stackoverflow.com/users/2721824/digital-rounin
-	 * http://stackoverflow.com/questions/16730711/get-my-wifi-ip-address-android
-	 */
-	public String formatIP(int ip){
-		if (ByteOrder.nativeOrder().equals(ByteOrder.LITTLE_ENDIAN)) {
-			ip = Integer.reverseBytes(ip);
-		}
-		try {
-			return InetAddress.getByAddress(BigInteger.valueOf(ip).toByteArray()).getHostAddress();
-		} catch (UnknownHostException e) {
-			return null;
-		}
 	}
 }

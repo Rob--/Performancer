@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -56,7 +55,7 @@ public class Device extends Activity {
 		lvDevice.setOnItemClickListener(new OnItemClickListener() {
 		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		    	String t = lvDevice.getItemAtPosition(position).toString();
-		    	
+
 		    	if(t.split(":")[0].contains("Board")){
 		    		tools.MsgBox("The name of the underlying board.", "Board", Device.this);
 		    	} else if(t.split(":")[0].contains("Bootloader")){
@@ -127,14 +126,11 @@ public class Device extends Activity {
         	lvDevice            .setAdapter(infoDevice.populateListView(Device.this));
         	lvDevice            .onRestoreInstanceState(state);
         	handler             .postDelayed(this, prefs.getInt("delay", 500));
-	                                                     /*              ---> we could either do 500, it        */
-	                                                       /*   might use some extra battery but we're updating  */
-	                                                         /*        the wifi, so it's worth it. Right?         */
         }
     };
     
     public void updateStart(){
-    	handler.postDelayed(update, 1);
+    	handler.post(update);
     }
     
     public void updateStop(){
@@ -168,7 +164,6 @@ public class Device extends Activity {
 	@Override
 	public void onAttachedToWindow() {
 	    super.onAttachedToWindow();
-	    Window window = getWindow();
-	    window.setFormat(PixelFormat.RGBA_8888);
+	    getWindow().setFormat(PixelFormat.RGBA_8888);
 	}
 }

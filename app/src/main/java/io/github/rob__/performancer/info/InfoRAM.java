@@ -142,8 +142,8 @@ public class InfoRAM {
 			double highFree     = 0;
 			double lowTotal     = 0;
 			double lowFree      = 0;
-			double high;
-			double low;
+			double high         = 0;
+			double low          = 0;
 
 			try {
 				reader = new RandomAccessFile("/proc/meminfo", "r");
@@ -170,8 +170,12 @@ public class InfoRAM {
 					e.printStackTrace();
 					reader.close();
 				}
-				high = round(100    - ((highFree    / highTotal)    * 100), 2);
-				low = round(100     - ((lowFree     / lowTotal)     * 100), 2);
+				try {
+					high = round(100 - ((highFree / highTotal) * 100), 2);
+					low = round(100 - ((lowFree / lowTotal) * 100), 2);
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				}
 				
 				info.add("Kernel: "     + String.valueOf(low)   + "%");
 				info.add("Non-kernel: " + String.valueOf(high)  + "%");
@@ -189,7 +193,7 @@ public class InfoRAM {
 
 	private String simplify(String string, String line, boolean onlyNumber) {
 		int number;
-		number = Integer.parseInt(line.replace(" ", "").replace("kB",  "").substring(line.indexOf(":") + 1));
+		number = Integer.parseInt(line.replaceAll("[^0-9]", "").replace(" ", "").replace("kB",  "").substring(line.replaceAll("[^0-9]", "").indexOf(":") + 1));
 		if(!onlyNumber){
 			return (prefs.getString("data unit", "mb").equals("mb")) ? string + ": " + String.valueOf(formatter.format(number / 1000)) + " MB" : string + ": " + String.valueOf(formatter.format(number)) + " kB";
 		} else {

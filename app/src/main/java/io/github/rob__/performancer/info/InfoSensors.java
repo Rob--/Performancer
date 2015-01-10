@@ -272,7 +272,7 @@ public class InfoSensors implements LocationListener {
 		prefs.edit().putBoolean("step counter",			check(19)).apply();
 	}
 	
-	private boolean check(int sensor){ return (sm.getDefaultSensor(sensor) != null); }
+	private boolean check(int sensor){ try{ return (sm.getDefaultSensor(sensor) != null); } catch (NullPointerException e) { e.printStackTrace(); return false; } }
 	
 	/*
 	 * 

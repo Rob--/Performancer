@@ -4,6 +4,23 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+	<!-- Disallows access to tablets (due to GUI...) -->
+	<compatible-screens>
+		<screen android:screenSize="small" android:screenDensity="ldpi" />
+		<screen android:screenSize="small" android:screenDensity="mdpi" />
+		<screen android:screenSize="small" android:screenDensity="hdpi" />
+		<screen android:screenSize="small" android:screenDensity="xhdpi" />
+		<screen android:screenSize="small" android:screenDensity="480" />
+		<screen android:screenSize="small" android:screenDensity="640" />
+
+		<screen android:screenSize="normal" android:screenDensity="ldpi" />
+		<screen android:screenSize="normal" android:screenDensity="mdpi" />
+		<screen android:screenSize="normal" android:screenDensity="hdpi" />
+		<screen android:screenSize="normal" android:screenDensity="xhdpi" />
+		<screen android:screenSize="normal" android:screenDensity="480" />
+		<screen android:screenSize="normal" android:screenDensity="640" />
+	</compatible-screens>
+
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="21" />
@@ -26,12 +43,15 @@
     <uses-feature
         android:name="android.hardware.wifi"
         android:required="false" />
-    <uses-feature
-        android:name="android.hardware.wifi"
-        android:required="false" />
 
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:required="false" />
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        android:required="false" />
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE"
         android:required="false" />
 
     <application
@@ -84,6 +104,10 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".Network"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
-
 </manifest>
