@@ -1,3 +1,5 @@
+[The fun starts here.](https://github.com/Rob--/Performancer/tree/master/app/src/main/java/io/github/rob__/performancer)
+---
 # Performancer
 #### A simple application to analyse hardware components usage on a given device.
 ---
