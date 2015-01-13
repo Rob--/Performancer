@@ -94,7 +94,7 @@ The collection is split into 7 sections:
     * Recieved Data (since last reboot)
   * Mobile
     * Sent Data (since last reboot)
-    * Reciveed Data (since last reboot)
+    * Recieved Data (since last reboot)
 
 ---
 
